@@ -21,13 +21,20 @@ module OneRoster
         @username     = username(client)
         @provider     = 'oneroster'
         @grades       = attributes['grades']
-        @tenant_id    = attributes.dig("orgs", 0, "sourcedId")
+        @tenant_id    = tenant_id_from(attributes)
       end
 
       def username(client = nil)
         username_source = client&.username_source
 
         @username ||= presence(username_from(username_source)) || default_username
+      end
+
+      def tenant_id_from(attributes)
+        orgs = attributes.dig("orgs")
+        return unless orgs && orgs.is_a?(Array)
+
+        orgs.filter{ |org| org["type"] == "org"}.first&.dig("sourcedId")
       end
 
       def to_h
