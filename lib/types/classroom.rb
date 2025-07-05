@@ -15,7 +15,8 @@ module OneRoster
                   :term_end_date,
                   :term_id,
                   :school_name,
-                  :school_uid
+                  :school_uid,
+                  :tenant_id
 
       def initialize(attributes = {})
         @uid             = attributes['id']
@@ -30,6 +31,7 @@ module OneRoster
         @term_id         = attributes['term_id']
         @school_name     = attributes['school_name']
         @school_uid      = attributes['school_uid']
+        @tenant_id       = attributes['tenant_id']
         @provider        = 'oneroster'
       end
     end

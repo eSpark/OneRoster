@@ -84,7 +84,8 @@ module OneRoster
           'term_end_date' => term&.end_date,
           'term_id' => oneroster_class.term_id,
           'school_name' => school&.name,
-          'school_uid' => school&.uid
+          'school_uid' => school&.uid,
+          'tenant_id' => school&.tenant_id
         )
       end
     end
