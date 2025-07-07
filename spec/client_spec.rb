@@ -355,6 +355,8 @@ RSpec.describe OneRoster::Client do
         expect(first_classroom.course_number).to eq(course_1['courseCode'])
         expect(first_classroom.period).to eq('1')
         expect(first_classroom.grades).to eq(class_1['grades'])
+        expect(first_classroom.tenant_id).to eq(class_1['tenant_id'])
+        expect(first_classroom.school_id).to eq(class_1['school_id'])
         expect(first_classroom.subjects).to eq([])
         expect(first_classroom.term_name).to eq('term name')
         expect(first_classroom.term_start_date).to eq('2019-08-21')

@@ -18,6 +18,7 @@ module OneRoster
         @last_name    = attributes['familyName']
         @status       = attributes['status']
         @email        = attributes['email']
+        @api_username = attributes['username']
         @username     = username(client)
         @provider     = 'oneroster'
         @grades       = attributes['grades']
