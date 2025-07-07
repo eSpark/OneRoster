@@ -252,7 +252,9 @@ RSpec.shared_context 'api responses' do
       'periods' => %w(1 2),
       'grades' => %w(04 05),
       'junk' => 'data',
-      'terms' => [{ 'sourcedId' => '1' }]
+      'terms' => [{ 'sourcedId' => '1' }],
+      'tenant_id' => 'tenant_id',
+      'school_id' => 'school_id'
     }
   end
 

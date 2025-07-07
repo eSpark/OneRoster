@@ -10,7 +10,7 @@ module OneRoster
                   :provider,
                   :email,
                   :grades,
-                  :tenant_id
+                  :school_id
 
       def initialize(attributes = {}, client: nil)
         @uid          = attributes['sourcedId']
@@ -18,16 +18,24 @@ module OneRoster
         @last_name    = attributes['familyName']
         @status       = attributes['status']
         @email        = attributes['email']
+        @api_username = attributes['username']
         @username     = username(client)
         @provider     = 'oneroster'
         @grades       = attributes['grades']
-        @tenant_id    = attributes.dig("orgs", 0, "sourcedId")
+        @school_id    = school_id_from(attributes)
       end
 
       def username(client = nil)
         username_source = client&.username_source
 
         @username ||= presence(username_from(username_source)) || default_username
+      end
+
+      def school_id_from(attributes)
+        orgs = attributes.dig("orgs")
+        return unless orgs && orgs.is_a?(Array)
+
+        orgs.filter{ |org| org["type"] == "org"}.first&.dig("sourcedId")
       end
 
       def to_h
@@ -39,7 +47,7 @@ module OneRoster
           provider: @provider,
           email: @email,
           grades: @grades,
-          tenant_id: @tenant_id
+          school_id: @school_id
 }
       end
 
