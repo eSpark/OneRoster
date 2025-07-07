@@ -2,7 +2,7 @@
 
 module OneRoster
   module Types
-    class Tenant
+    class School
       attr_reader :uid, :name, :number, :tenant_id
 
       def initialize(attributes = {}, *)
