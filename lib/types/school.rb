@@ -10,14 +10,7 @@ module OneRoster
         @name     = attributes['name']
         @number   = attributes['identifier']
         @provider = 'oneroster'
-        @tenant_id = tenant_id_from(attributes)
-      end
-
-      def tenant_id_from(attributes)
-        orgs = attributes.dig("parent")
-        return unless orgs && orgs.is_a?(Array)
-
-        orgs.filter{ |org| org["type"] == "org"}.first&.dig("sourcedId")
+        @tenant_id = attributes.dig("parent", "sourcedId")
       end
     end
   end
