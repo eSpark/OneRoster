@@ -698,7 +698,8 @@ RSpec.describe OneRoster::Client do
           provider: 'oneroster',
           email: student_1['email'],
           grades: student_1['grades'],
-          school_id: nil
+          school_id: nil,
+          identifier: student_1['identifier']
         )
       end
     end
