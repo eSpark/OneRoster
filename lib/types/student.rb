@@ -10,7 +10,8 @@ module OneRoster
                   :provider,
                   :email,
                   :grades,
-                  :school_id
+                  :school_id,
+                  :identifier
 
       def initialize(attributes = {}, client: nil)
         @uid          = attributes['sourcedId']
@@ -23,6 +24,7 @@ module OneRoster
         @provider     = 'oneroster'
         @grades       = attributes['grades']
         @school_id    = school_id_from(attributes)
+        @identifier   = attributes['identifier']
       end
 
       def username(client = nil)
@@ -47,7 +49,8 @@ module OneRoster
           provider: @provider,
           email: @email,
           grades: @grades,
-          school_id: @school_id
+          school_id: @school_id,
+          identifier: @identifier
 }
       end
 

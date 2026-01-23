@@ -114,7 +114,8 @@ RSpec.shared_context 'api responses' do
       'username' => '',
       'email' => '',
       'status' => 'active',
-      'junk' => 'data'
+      'junk' => 'data',
+      'identifier' => 'student_identifier_1'
     }
   end
 
