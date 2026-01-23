@@ -338,6 +338,7 @@ RSpec.describe OneRoster::Client do
       mock_request(OneRoster::CLASSES_ENDPOINT, classes_response)
       mock_request(OneRoster::COURSES_ENDPOINT, courses_response)
       mock_request(OneRoster::ACADEMIC_SESSIONS_ENDPOINT, terms_response)
+      mock_request(OneRoster::SCHOOLS_ENDPOINT, schools_response)
     end
 
     context 'without course_codes passed in' do
@@ -355,8 +356,8 @@ RSpec.describe OneRoster::Client do
         expect(first_classroom.course_number).to eq(course_1['courseCode'])
         expect(first_classroom.period).to eq('1')
         expect(first_classroom.grades).to eq(class_1['grades'])
-        expect(first_classroom.tenant_id).to eq(class_1['tenant_id'])
-        expect(first_classroom.school_id).to eq(class_1['school_id'])
+        expect(first_classroom.tenant_id).to eq(school_1.dig('parent', 'sourcedId'))
+        expect(first_classroom.school_uid).to eq(class_1.dig('school', 'sourcedId'))
         expect(first_classroom.subjects).to eq([])
         expect(first_classroom.term_name).to eq('term name')
         expect(first_classroom.term_start_date).to eq('2019-08-21')
