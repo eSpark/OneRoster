@@ -253,8 +253,7 @@ RSpec.shared_context 'api responses' do
       'grades' => %w(04 05),
       'junk' => 'data',
       'terms' => [{ 'sourcedId' => '1' }],
-      'tenant_id' => 'tenant_id',
-      'school_id' => 'school_id'
+      'school' => { 'sourcedId' => 'school_id' }
     }
   end
 
@@ -342,6 +341,22 @@ RSpec.shared_context 'api responses' do
   let(:courses_body) { { 'courses' => [course_1, course_2, course_3, course_4] } }
   let(:courses_response) do
     OneRoster::Response.new(stub(body: courses_body, status: status, env: stub(url: courses_response_url), headers: {}))
+  end
+
+  #################################### SCHOOLS RESPONSE #####################################
+  let(:school_1) do
+    {
+      'sourcedId' => 'school_id',
+      'name' => 'Test School',
+      'identifier' => 'TS001',
+      'parent' => { 'sourcedId' => 'tenant_id' }
+    }
+  end
+
+  let(:schools_response_url) { stub(path: OneRoster::SCHOOLS_ENDPOINT) }
+  let(:schools_body) { { 'orgs' => [school_1] } }
+  let(:schools_response) do
+    OneRoster::Response.new(stub(body: schools_body, status: status, env: stub(url: schools_response_url), headers: {}))
   end
 
   ################################### PAGINATION RESPONSE ###################################
